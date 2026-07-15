@@ -44,7 +44,7 @@
 
   /* ---------- ambient background ---------- */
   #ambient{ position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
-  #ambient .blob{ position:absolute; border-radius:50%; filter:blur(120px); mix-blend-mode:screen; }
+  #ambient .blob{ position:absolute; border-radius:50%; filter:blur(120px); mix-blend-mode:screen; will-change:transform; transform:translateZ(0); }
   #ambient .blob.a{ width:55vw; height:55vw; top:-18%; left:-14%; background:var(--accent); opacity:0.16; animation:driftA 36s ease-in-out infinite; }
   #ambient .blob.b{ width:60vw; height:60vw; bottom:-26%; right:-16%; background:var(--accent2); opacity:0.14; animation:driftB 42s ease-in-out infinite; }
   #ambient .blob.c{ width:42vw; height:42vw; top:38%; left:38%; background:#8a4a2a; opacity:0.1; animation:driftA 30s ease-in-out infinite reverse; }
@@ -538,24 +538,27 @@
 
   // ---------- expanding fill cards ----------
   document.querySelectorAll('[data-magnetic]').forEach(card=>{
-    card.addEventListener('mouseenter', ()=> cursor.classList.add('grow'));
-    card.addEventListener('mouseleave', ()=>{ cursor.classList.remove('grow'); card.style.transform = 'translate(0,0)'; });
+    let cardRect = null;
+    card.addEventListener('mouseenter', ()=>{ cursor.classList.add('grow'); cardRect = card.getBoundingClientRect(); });
+    card.addEventListener('mouseleave', ()=>{ cursor.classList.remove('grow'); card.style.transform = 'translate(0,0)'; cardRect = null; });
     card.addEventListener('mousemove', e=>{
-      const r = card.getBoundingClientRect();
-      const relX = e.clientX - r.left - r.width/2;
-      const relY = e.clientY - r.top - r.height/2;
+      if(!cardRect) return;
+      const relX = e.clientX - cardRect.left - cardRect.width/2;
+      const relY = e.clientY - cardRect.top - cardRect.height/2;
       card.style.transform = `translate(${relX*0.05}px, ${relY*0.08}px)`;
     });
   });
 
   // ---------- magnetic footer title ----------
   const distortTitle = document.getElementById('distortTitle');
+  let distortRect = null;
+  distortTitle.addEventListener('mouseenter', ()=>{ distortRect = distortTitle.getBoundingClientRect(); });
   distortTitle.addEventListener('mousemove', e=>{
-    const r = distortTitle.getBoundingClientRect();
-    const relX = (e.clientX - r.left - r.width/2) / r.width;
+    if(!distortRect) return;
+    const relX = (e.clientX - distortRect.left - distortRect.width/2) / distortRect.width;
     distortTitle.style.transform = `skewX(${relX*5}deg)`;
   });
-  distortTitle.addEventListener('mouseleave', ()=>{ distortTitle.style.transform='skewX(0)'; });
+  distortTitle.addEventListener('mouseleave', ()=>{ distortTitle.style.transform='skewX(0)'; distortRect = null; });
 
   // ---------- lightbox ----------
   const lightbox = document.getElementById('lightbox');
