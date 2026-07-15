@@ -471,8 +471,8 @@
       if(!hasMoved){ cx=mx; cy=my; hasMoved=true; }
     });
     function loop(){
-      cx += (mx-cx)*0.18;
-      cy += (my-cy)*0.18;
+      cx += (mx-cx)*0.55;
+      cy += (my-cy)*0.55;
       cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
       label.style.transform = `translate(${cx}px, ${cy+34}px) translate(-50%,-50%)`;
       requestAnimationFrame(loop);
