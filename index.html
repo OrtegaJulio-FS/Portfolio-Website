@@ -3,12 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Julio Ortega — Web Designer</title>
-<meta name="description" content="Julio Ortega — web designer and front-end developer building art-directed, motion-driven websites. Kinetic type, custom interaction, and interfaces that feel like something instead of just displaying it.">
-<meta property="og:title" content="Julio Ortega — Web Designer">
-<meta property="og:description" content="Web designer building sites with a pulse — kinetic type, custom motion, and interfaces built around one idea followed all the way through.">
+<title>Julio Ortega — Web Designer for Small Businesses in Des Moines, IA</title>
+<meta name="description" content="Custom websites for small businesses in Des Moines, Iowa — cafés, restaurants, landscapers, boutiques. Fast, hand-built sites with no monthly page-builder fees. Free homepage preview, no commitment.">
+<meta property="og:title" content="Julio Ortega — Web Designer for Small Businesses in Des Moines, IA">
+<meta property="og:description" content="Custom websites for small businesses in Des Moines, Iowa. Fast, hand-built, no monthly fees. Free homepage preview, no commitment.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://julioortega.design/">
+<meta property="og:image" content="https://julioortega.design/images/julio-portrait.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23111110'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%23e8552c' font-family='Helvetica,Arial,sans-serif'%3EJ%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Julio Ortega — Web Design",
+  "url": "https://julioortega.design/",
+  "email": "mailto:Julio.ortega1013@gmail.com",
+  "areaServed": {
+    "@type": "City",
+    "name": "Des Moines, IA"
+  },
+  "serviceType": "Web design and front-end development for small businesses",
+  "sameAs": [
+    "https://github.com/OrtegaJulio-FS",
+    "https://www.linkedin.com/in/julio-ortega-2b9ba91b3",
+    "https://www.fiverr.com/s/kL9K50N"
+  ]
+}
+</script>
 <style>
   :root{
     --bg:#111110;
@@ -40,6 +61,11 @@
   [tabindex]:focus-visible{
     outline:2px solid var(--accent);
     outline-offset:4px;
+  }
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
   }
 
   /* ---------- ambient background ---------- */
@@ -173,6 +199,8 @@
   }
   .wheel-item .wi-num{ position:absolute; top:-1.6em; left:2px; font-size:11px; letter-spacing:.1em; color:var(--muted); transition:color .3s; }
   .wheel-item.active .wi-num{ color:var(--accent); }
+  /* label for a future real, launched project — see the commented template in #wheelTrack */
+  .wheel-item .wi-live-tag{ position:absolute; top:-1.6em; left:2.8em; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); }
   .wheel-item .wi-img{
     position:relative; width:100%; height:100%;
     background-size:cover; background-position:top center;
@@ -206,6 +234,12 @@
   .wheel-caption .wc-year{ font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-top:.8vh; transition:opacity .3s; }
   .wheel-caption .wc-desc{ max-width:44ch; margin-top:1vh; color:var(--muted); font-size:.85rem; }
 
+  /* ---------- no-JS fallback for the wheel ---------- */
+  .noscript-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:4vh 2vw; margin-top:4vh; }
+  .noscript-grid img{ width:100%; height:auto; display:block; margin-bottom:1.5vh; }
+  .noscript-grid h3{ font-size:1.1rem; font-weight:700; }
+  .noscript-grid p{ font-size:.85rem; color:var(--muted); margin-top:.8vh; max-width:44ch; }
+
   /* Real client screenshots, saved locally in images/ alongside this file. */
   .proj-dh{ background-image:url("images/dos-hermanos.jpg"); }
   .proj-ssc{ background-image:url("images/sunny-side-coffee.jpg"); }
@@ -219,8 +253,24 @@
   /* goldeneye's source screenshot is a tall full-page capture — anchor to the
      top so the actual hero/logo shows instead of a random mid-page crop. */
   #lightbox .lb-img.proj-ge{ background-position:top center; }
-  #lightbox .lb-caption{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
-  #lightbox .lb-desc{ max-width:50ch; margin:1.4vh auto 0; font-size:.9rem; color:var(--muted); text-transform:none; letter-spacing:normal; }
+  #lightbox .lb-tag{
+    display:inline-block; font-size:10px; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--accent); border:1px solid var(--accent); border-radius:100px;
+    padding:.5em 1.1em; margin-bottom:1.6vh;
+  }
+  #lightbox .lb-caption{ font-size:1.1rem; font-weight:700; letter-spacing:normal; text-transform:none; color:var(--fg); }
+  #lightbox .lb-case{
+    max-width:56ch; margin:3vh auto 0; text-align:left;
+    display:grid; gap:2.6vh;
+  }
+  #lightbox .lb-block .lb-label{
+    display:block; font-size:10px; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--accent2); margin-bottom:.7vh;
+  }
+  #lightbox .lb-block p{ font-size:.9rem; line-height:1.55; color:var(--muted); }
+  /* shown only when a wheel item carries a real data-live-url (see the commented live-project template) */
+  #lightbox .lb-live-link{ display:inline-block; margin-top:3vh; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; }
+  #lightbox .lb-live-link[hidden]{ display:none; }
   #lightbox .lb-close{ position:absolute; top:3vh; right:5vw; font-size:11px; letter-spacing:.15em; text-transform:uppercase; cursor:none; }
 
   /* ---------- scroll-lit statement ---------- */
@@ -254,6 +304,18 @@
   .card .num, .card h3, .card p{ position:relative; z-index:1; transition:color .3s; }
   .card:hover .num, .card:hover .icon, .card:hover h3, .card:hover p{ color:var(--bg); }
 
+  /* ---------- how it works ---------- */
+  #process{
+    background-image: radial-gradient(rgba(244,241,234,0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .process-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:5vh; }
+  @media (max-width:800px){ .process-grid{ grid-template-columns:1fr; } }
+  .process-step{ background:var(--bg); padding:4vh 2vw; }
+  .process-step .num{ font-size:11px; opacity:.5; color:var(--accent2); }
+  .process-step h3{ font-size:1.15rem; font-weight:600; margin-top:2vh; }
+  .process-step p{ font-size:.85rem; margin-top:1.2vh; opacity:.7; max-width:26ch; }
+
   /* ---------- about ---------- */
   #about{
     background-image: radial-gradient(rgba(244,241,234,0.06) 1px, transparent 1px);
@@ -272,12 +334,20 @@
   #about .facts div{ font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
   #about .facts strong{ display:block; color:var(--fg); font-size:1rem; letter-spacing:0; text-transform:none; margin-top:.6vh; }
 
+  /* ---------- testimonial (inactive — no real testimonial exists yet) ---------- */
+  #testimonial{ text-align:center; }
+  .testimonial-quote{ max-width:56ch; margin:0 auto; }
+  .testimonial-quote p{ font-size:clamp(1.3rem,2.6vw,2rem); font-weight:500; line-height:1.45; }
+  .testimonial-quote cite{ display:block; margin-top:3vh; font-size:.85rem; font-style:normal; color:var(--muted); }
+
   /* ---------- contact / footer ---------- */
   footer{ min-height:60vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; }
+  footer .cta-line{ max-width:34ch; font-size:clamp(1rem, 2vw, 1.3rem); font-weight:500; color:var(--fg); margin-bottom:3vh; }
   .distort-title{ font-size:clamp(2rem, 9vw, 7rem); font-weight:800; letter-spacing:-0.02em; transition:transform .15s ease-out, letter-spacing .3s; cursor:none; word-break:break-word; }
   .distort-title:hover{ letter-spacing:0.01em; }
   footer .sub{ margin-top:3vh; color:var(--muted); font-size:.9rem; }
   footer .socials{ margin-top:5vh; display:flex; gap:4vw; font-size:11px; letter-spacing:.15em; text-transform:uppercase; }
+  footer .socials a{ display:inline-block; padding:16px 4px; margin:-16px -4px; }
   footer .tag{ margin-top:6vh; font-size:10px; letter-spacing:.2em; text-transform:uppercase; opacity:.35; }
 
   @media (prefers-reduced-motion: reduce){
@@ -324,8 +394,8 @@
   </h1>
   <div class="cycle-line">I design <span class="cycle-word-wrap"><span class="cycle-word" id="cycleWord">websites</span></span><span class="caret" aria-hidden="true"></span></div>
   <div class="hero-meta">
-    <p>Web designer and front-end developer building art-directed, motion-driven sites — one idea, followed all the way through, instead of ten safe ones stacked on top of each other.</p>
-    <div class="coords">Available for freelance<br>Remote / worldwide</div>
+    <p>I design and build fast, custom websites for local businesses — the kind that turn visitors into customers, not just another page online.</p>
+    <div class="coords">Based in Des Moines, IA<br>Local &amp; remote</div>
   </div>
   <div class="scroll-cue">Selected work</div>
 </section>
@@ -335,26 +405,68 @@
   <div class="wheel-head">
     <div>
       <div class="eyebrow">Selected work</div>
-      <h2>Three concept designs, 2026</h2>
+      <h2>Three concepts, built like the real thing</h2>
     </div>
-    <p>Self-directed concept builds — designed and coded end to end as practice, not live client work. Use the arrows, swipe, or click a side frame to bring it forward.</p>
+    <p>Each one is a concept I designed and built myself — not commissioned work, but built exactly the way I'd build for a real client. Click a card to see the thinking behind it.</p>
   </div>
 
   <div class="wheel-stage" id="wheelStage">
     <button class="wheel-nav prev" id="wheelPrev" aria-label="Previous project">←</button>
     <div class="wheel-track" id="wheelTrack">
-      <div class="wheel-item" data-title="Dos Hermanos Landscaping" data-year="2026 · Concept design" data-desc="A landscaping and lawn-care concept — warm cream-and-forest-green palette, a trust bar of happy homeowners, and a hero built around 'your yard, cared for like family.'" tabindex="0" role="button">
+      <div class="wheel-item"
+        data-title="Dos Hermanos Landscaping"
+        data-year="2026 · Concept design"
+        data-desc="A landscaping and lawn-care concept built around trust — warm, grounded colors and a homepage that leads straight to a quote request."
+        data-problem="Landscapers get hired on trust, but most one-truck crews have no website at all. The moment a customer googles them mid-quote and finds nothing, that costs credibility right when it matters most."
+        data-approach="A warm cream-and-forest-green palette that reads as established, not amateur. The homepage leads with a request-a-quote button above the fold and a simple photo strip of finished yards, so the business proves itself in one screen instead of explaining itself in paragraphs."
+        data-shows="How I'd turn a phone-only, word-of-mouth business into something that looks legitimate to a stranger in the first five seconds."
+        tabindex="0" role="button">
         <span class="wi-num">01</span>
         <div class="wi-img proj-dh" aria-hidden="true"></div>
+        <span class="visually-hidden">Homepage screenshot of the Dos Hermanos Landscaping concept — a cream and forest-green landscaping and lawn-care website.</span>
       </div>
-      <div class="wheel-item" data-title="Sunny Side Coffee" data-year="2026 · Concept design" data-desc="A neighborhood coffee shop concept — playful sun branding, a hand-drawn divider, and a 'today's special' card pinned right over the hero photo." tabindex="0" role="button">
+      <div class="wheel-item"
+        data-title="Sunny Side Coffee"
+        data-year="2026 · Concept design"
+        data-desc="A neighborhood coffee shop concept with playful sun branding and a 'today's special' pinned right over the homepage photo."
+        data-problem="Small cafés live and die by regulars checking what's new. A static site with an old menu photo actively costs sales, because customers stop trusting it and stop checking it."
+        data-approach="Playful sun branding and a hand-drawn divider keep the warmth of a neighborhood spot, while a 'today's special' card sits right over the hero photo — the one thing a returning customer actually wants, answered before they scroll."
+        data-shows="How I'd design around the one piece of information a repeat customer checks the site for, instead of burying it in a menu page."
+        tabindex="0" role="button">
         <span class="wi-num">02</span>
         <div class="wi-img proj-ssc" aria-hidden="true"></div>
+        <span class="visually-hidden">Homepage screenshot of the Sunny Side Coffee concept — a neighborhood coffee shop website with sun branding and a today's-special card.</span>
       </div>
-      <div class="wheel-item" data-title="goldeneye" data-year="2026 · Concept design" data-desc="A vintage and streetwear boutique concept — full-bleed editorial photography, a bold italic wordmark, and a shop-by-category grid right below the fold." tabindex="0" role="button">
+      <div class="wheel-item"
+        data-title="goldeneye"
+        data-year="2026 · Concept design"
+        data-desc="A vintage and streetwear boutique concept — full-bleed photography and a shop-by-category grid right below the fold."
+        data-problem="A boutique's whole pitch is its taste. A generic template undersells inventory that's actually well curated, and shoppers bounce before they see what's in stock."
+        data-approach="Full-bleed editorial photography and a bold wordmark set the tone immediately, then a shop-by-category grid gets shoppers browsing real inventory within one scroll, instead of stalling on a mission statement."
+        data-shows="How I'd balance style with usability — a site that looks as sharp as the inventory, but still gets people shopping fast."
+        tabindex="0" role="button">
         <span class="wi-num">03</span>
         <div class="wi-img proj-ge" aria-hidden="true"></div>
+        <span class="visually-hidden">Homepage screenshot of the goldeneye concept — a vintage and streetwear boutique website with full-bleed photography.</span>
       </div>
+      <!-- ACTIVATE WHEN REAL — live project template. Duplicate this block with real
+           data once a concept becomes an actual launched client site, fill in the
+           brackets, add a matching .proj-XX background-image rule in the CSS above,
+           and uncomment. No JS changes needed — wheelCount reads the DOM directly.
+      <div class="wheel-item"
+        data-title="[Business Name]"
+        data-year="2026 · Live site"
+        data-desc="[Short one-line caption for the wheel caption row.]"
+        data-problem="[The problem this business had.]"
+        data-approach="[The approach taken.]"
+        data-shows="[What it shows.]"
+        data-live-url="[https://example.com]"
+        tabindex="0" role="button">
+        <span class="wi-num">04</span>
+        <span class="wi-live-tag">Live site</span>
+        <div class="wi-img proj-XX" aria-hidden="true"></div>
+      </div>
+      -->
     </div>
     <button class="wheel-nav next" id="wheelNext" aria-label="Next project">→</button>
   </div>
@@ -364,16 +476,37 @@
     <div class="wc-text" aria-live="polite">
       <div class="wc-title" id="wcTitle"><span>Dos Hermanos Landscaping</span></div>
       <div class="wc-year" id="wcYear">2026 · Concept design</div>
-      <div class="wc-desc" id="wcDesc">A landscaping and lawn-care concept — warm cream-and-forest-green palette, a trust bar of happy homeowners, and a hero built around "your yard, cared for like family."</div>
+      <div class="wc-desc" id="wcDesc">A landscaping and lawn-care concept built around trust — warm, grounded colors and a homepage that leads straight to a quote request.</div>
     </div>
   </div>
+
+  <noscript>
+    <style>#wheelStage, .wheel-caption{ display:none; }</style>
+    <div class="noscript-grid">
+      <article>
+        <img src="images/dos-hermanos.jpg" alt="Homepage of the Dos Hermanos Landscaping concept design" loading="lazy" width="900" height="451">
+        <h3>Dos Hermanos Landscaping — Concept design</h3>
+        <p>A landscaping and lawn-care concept built around trust — warm, grounded colors and a homepage that leads straight to a quote request.</p>
+      </article>
+      <article>
+        <img src="images/sunny-side-coffee.jpg" alt="Homepage of the Sunny Side Coffee concept design" loading="lazy" width="900" height="477">
+        <h3>Sunny Side Coffee — Concept design</h3>
+        <p>A neighborhood coffee shop concept with playful sun branding and a "today's special" pinned right over the homepage photo.</p>
+      </article>
+      <article>
+        <img src="images/goldeneye.jpg" alt="Homepage of the goldeneye concept design" loading="lazy" width="672" height="1200">
+        <h3>goldeneye — Concept design</h3>
+        <p>A vintage and streetwear boutique concept — full-bleed photography and a shop-by-category grid right below the fold.</p>
+      </article>
+    </div>
+  </noscript>
 </section>
 
 <section id="statement">
   <div class="quote-mark" aria-hidden="true">&rdquo;</div>
   <div class="eyebrow">Approach</div>
   <p class="reveal-wrap" id="revealText">
-    Most sites are deliverables — clean, safe, forgettable. I'd rather build the kind of site people screenshot: one strange idea, committed to fully, instead of ten trends stacked on top of each other.
+    A good website does three things for a small business: it helps people find you, it makes you look legit the second they land, and it turns a visitor into a customer. That's what I build — nothing you don't need, nothing that gets in the way.
   </p>
 </section>
 
@@ -391,8 +524,8 @@
         <circle cx="6.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/>
         <circle cx="9" cy="6.5" r=".6" fill="currentColor" stroke="none"/>
       </svg>
-      <h3>Web design</h3>
-      <p>Full site design — layout, typography, motion, and the one signature idea that carries the whole thing.</p>
+      <h3>A site built around your business</h3>
+      <p>Not a template with your logo dropped in. Design built around what makes your business worth visiting — your homepage, your menu or booking page, all of it.</p>
     </div>
     <div class="card" data-magnetic>
       <div class="fill"></div>
@@ -401,8 +534,8 @@
         <polyline points="8 5 3 12 8 19"/>
         <polyline points="16 5 21 12 16 19"/>
       </svg>
-      <h3>Front-end build</h3>
-      <p>Hand-built HTML/CSS/JS — no page-builder bloat, fast, and animated the way it was actually designed.</p>
+      <h3>Fast, and no monthly fees</h3>
+      <p>Hand-coded, not built on a page-builder platform — so it loads fast, works great on phones, and you're not paying a subscription just to keep your own site online.</p>
     </div>
     <div class="card" data-magnetic>
       <div class="fill"></div>
@@ -410,33 +543,75 @@
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
         <path d="M5 3 L5 19 L9.5 15 L12.5 21 L15 19.7 L12 13.5 L18 13.2 Z"/>
       </svg>
-      <h3>Motion & interaction</h3>
-      <p>Scroll choreography, custom cursors, and the small details people remember and screen-record.</p>
+      <h3>The little details</h3>
+      <p>Smooth scrolling and small, subtle touches that make your site feel polished — the difference between "put this together over a weekend" and "hired a professional."</p>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="section-mark" aria-hidden="true">04</div>
+  <div class="eyebrow">How it works</div>
+  <h2 style="font-size:clamp(1.8rem,4vw,3rem); font-weight:700; max-width:20ch;">Four steps, start to finish</h2>
+  <div class="process-grid">
+    <div class="process-step">
+      <span class="num">01</span>
+      <h3>Message me about your business</h3>
+      <p>Tell me what you do and what's not working about your site now — or that you don't have one yet.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">02</span>
+      <h3>Free homepage preview</h3>
+      <p>I design a real homepage for your business, no charge and no commitment, so you can see it before you decide anything.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">03</span>
+      <h3>You approve, I build</h3>
+      <p>Like what you see, and I build out the full site. Nothing moves forward until you say go.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">04</span>
+      <h3>Launch, everything handed off</h3>
+      <p>Your site goes live, and you get what you need to keep it — you're never locked out of your own business.</p>
     </div>
   </div>
 </section>
 
 <section id="about">
-  <div class="section-mark" aria-hidden="true">04</div>
+  <div class="section-mark" aria-hidden="true">05</div>
   <div class="eyebrow">About</div>
   <div class="about-grid">
     <div class="portrait" role="img" aria-label="Portrait of Julio Ortega"></div>
     <div>
-      <p class="statement">"I used to build generic deliverables. Now I try to build the kind of web experience that makes someone stop and look — then go check the source to see how it was done."</p>
+      <p class="statement">"I like helping small, local businesses show up online the way they actually deserve to — not a generic template, a site that looks like it belongs to your business, built by someone you can just call."</p>
       <div class="facts">
-        <div>Focus<strong>Web design, front-end dev</strong></div>
-        <div>Tools<strong>HTML/CSS/JS, GSAP, Three.js</strong></div>
+        <div>Focus<strong>Local business websites</strong></div>
+        <div>Based in<strong>Des Moines, IA — local &amp; remote</strong></div>
         <div>Available<strong>Freelance, remote</strong></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ACTIVATE WHEN REAL — testimonial section. Uncomment once a first real client
+     testimonial exists, fill in the brackets, and renumber every .section-mark
+     from this point on (it would become 06, pushing Contact to 07).
+<section id="testimonial">
+  <div class="section-mark" aria-hidden="true">06</div>
+  <div class="eyebrow">What clients say</div>
+  <blockquote class="testimonial-quote">
+    <p>"[Real client quote goes here.]"</p>
+    <cite>[Client Name], [Business Name]</cite>
+  </blockquote>
+</section>
+-->
+
 <footer id="contact">
-  <div class="section-mark" aria-hidden="true">05</div>
+  <div class="section-mark" aria-hidden="true">06</div>
   <div class="eyebrow">Get in touch</div>
-  <a href="mailto:Julio.ortega1013@gmail.com" class="distort-title" id="distortTitle" data-magnetic>Julio.ortega1013@gmail.com</a>
-  <p class="sub">Open to freelance web design and front-end work. Replies within a couple of days.</p>
+  <p class="cta-line">Tell me about your business — I'll send a free homepage preview, no commitment.</p>
+  <a href="mailto:Julio.ortega1013@gmail.com?subject=Website%20inquiry&body=Hi%20Julio%20%E2%80%94%20I%20run%20%5Bbusiness%20name%5D%20in%20%5Bcity%5D.%20I%27m%20looking%20for..." class="distort-title" id="distortTitle" data-magnetic>Julio.ortega1013@gmail.com</a>
+  <p class="sub">Open to freelance web design work for local businesses.</p>
   <div class="socials">
     <a href="https://github.com/OrtegaJulio-FS" target="_blank" rel="noopener">GitHub</a>
     <a href="https://www.linkedin.com/in/julio-ortega-2b9ba91b3" target="_blank" rel="noopener">LinkedIn</a>
@@ -449,8 +624,23 @@
   <div class="lb-close" id="lbClose" tabindex="0" role="button" aria-label="Close preview">Close ✕</div>
   <div class="lb-inner">
     <div class="lb-img" id="lbImg" aria-hidden="true"></div>
+    <div class="lb-tag" id="lbTag">Concept design</div>
     <div class="lb-caption" id="lbCaption"></div>
-    <div class="lb-desc" id="lbDesc"></div>
+    <div class="lb-case">
+      <div class="lb-block">
+        <span class="lb-label">The problem</span>
+        <p id="lbProblem"></p>
+      </div>
+      <div class="lb-block">
+        <span class="lb-label">The approach</span>
+        <p id="lbApproach"></p>
+      </div>
+      <div class="lb-block">
+        <span class="lb-label">What it shows</span>
+        <p id="lbShows"></p>
+      </div>
+    </div>
+    <a class="lb-live-link" id="lbLiveLink" href="#" target="_blank" rel="noopener" hidden>Visit the live site ↗</a>
   </div>
 </div>
 
@@ -497,7 +687,7 @@
   requestAnimationFrame(()=> document.querySelector('.hero-title').classList.add('in'));
 
   // ---------- hero shutter-cycle word ----------
-  const cycleWords = ['websites', 'interfaces', 'interactions', 'experiences', 'systems'];
+  const cycleWords = ['websites', 'online menus', 'booking pages', 'storefronts', 'brands'];
   let cycleIndex = 0;
   const cycleWordEl = document.getElementById('cycleWord');
   function cycleNext(){
@@ -562,16 +752,25 @@
   // ---------- lightbox ----------
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
+  const lbTag = document.getElementById('lbTag');
   const lbCaption = document.getElementById('lbCaption');
-  const lbDesc = document.getElementById('lbDesc');
+  const lbProblem = document.getElementById('lbProblem');
+  const lbApproach = document.getElementById('lbApproach');
+  const lbShows = document.getElementById('lbShows');
+  const lbLiveLink = document.getElementById('lbLiveLink');
   const lbCloseBtn = document.getElementById('lbClose');
   let lastFocused = null;
-  function openLightbox(imgClass, imgHTML, captionText, descText, triggerEl){
+  function openLightbox(imgClass, imgHTML, captionText, tagText, caseStudy, liveUrl, triggerEl){
     lastFocused = triggerEl || document.activeElement;
     lbImg.className = 'lb-img ' + imgClass;
     lbImg.innerHTML = imgHTML || '';
+    lbTag.textContent = tagText;
     lbCaption.textContent = captionText;
-    lbDesc.textContent = descText || '';
+    lbProblem.textContent = (caseStudy && caseStudy.problem) || '';
+    lbApproach.textContent = (caseStudy && caseStudy.approach) || '';
+    lbShows.textContent = (caseStudy && caseStudy.shows) || '';
+    if(liveUrl){ lbLiveLink.href = liveUrl; lbLiveLink.hidden = false; }
+    else{ lbLiveLink.removeAttribute('href'); lbLiveLink.hidden = true; }
     lightbox.classList.add('open');
     lbCloseBtn.focus();
   }
@@ -646,7 +845,9 @@
     if(i === activeWheel){
       const wiImg = item.querySelector('.wi-img');
       const extraClasses = Array.from(wiImg.classList).filter(c => c !== 'wi-img').join(' ');
-      openLightbox(extraClasses, wiImg.innerHTML, `${item.dataset.title} — ${item.dataset.year}`, item.dataset.desc, item);
+      const caseStudy = { problem: item.dataset.problem, approach: item.dataset.approach, shows: item.dataset.shows };
+      const tagText = item.dataset.year.includes('Live site') ? 'Live site' : 'Concept design';
+      openLightbox(extraClasses, wiImg.innerHTML, item.dataset.title, tagText, caseStudy, item.dataset.liveUrl, item);
     } else {
       activeWheel = i;
       layoutWheel();
