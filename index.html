@@ -219,8 +219,21 @@
   /* goldeneye's source screenshot is a tall full-page capture — anchor to the
      top so the actual hero/logo shows instead of a random mid-page crop. */
   #lightbox .lb-img.proj-ge{ background-position:top center; }
-  #lightbox .lb-caption{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
-  #lightbox .lb-desc{ max-width:50ch; margin:1.4vh auto 0; font-size:.9rem; color:var(--muted); text-transform:none; letter-spacing:normal; }
+  #lightbox .lb-tag{
+    display:inline-block; font-size:10px; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--accent); border:1px solid var(--accent); border-radius:100px;
+    padding:.5em 1.1em; margin-bottom:1.6vh;
+  }
+  #lightbox .lb-caption{ font-size:1.1rem; font-weight:700; letter-spacing:normal; text-transform:none; color:var(--fg); }
+  #lightbox .lb-case{
+    max-width:56ch; margin:3vh auto 0; text-align:left;
+    display:grid; gap:2.6vh;
+  }
+  #lightbox .lb-block .lb-label{
+    display:block; font-size:10px; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--accent2); margin-bottom:.7vh;
+  }
+  #lightbox .lb-block p{ font-size:.9rem; line-height:1.55; color:var(--muted); }
   #lightbox .lb-close{ position:absolute; top:3vh; right:5vw; font-size:11px; letter-spacing:.15em; text-transform:uppercase; cursor:none; }
 
   /* ---------- scroll-lit statement ---------- */
@@ -343,15 +356,36 @@
   <div class="wheel-stage" id="wheelStage">
     <button class="wheel-nav prev" id="wheelPrev" aria-label="Previous project">←</button>
     <div class="wheel-track" id="wheelTrack">
-      <div class="wheel-item" data-title="Dos Hermanos Landscaping" data-year="2026 · Concept design" data-desc="A landscaping and lawn-care concept — warm cream-and-forest-green palette, a trust bar of happy homeowners, and a hero built around 'your yard, cared for like family.'" tabindex="0" role="button">
+      <div class="wheel-item"
+        data-title="Dos Hermanos Landscaping"
+        data-year="2026 · Concept design"
+        data-desc="A landscaping and lawn-care concept built around trust — warm, grounded colors and a homepage that leads straight to a quote request."
+        data-problem="Landscapers get hired on trust, but most one-truck crews have no website at all. The moment a customer googles them mid-quote and finds nothing, that costs credibility right when it matters most."
+        data-approach="A warm cream-and-forest-green palette that reads as established, not amateur. The homepage leads with a request-a-quote button above the fold and a simple photo strip of finished yards, so the business proves itself in one screen instead of explaining itself in paragraphs."
+        data-shows="How I'd turn a phone-only, word-of-mouth business into something that looks legitimate to a stranger in the first five seconds."
+        tabindex="0" role="button">
         <span class="wi-num">01</span>
         <div class="wi-img proj-dh" aria-hidden="true"></div>
       </div>
-      <div class="wheel-item" data-title="Sunny Side Coffee" data-year="2026 · Concept design" data-desc="A neighborhood coffee shop concept — playful sun branding, a hand-drawn divider, and a 'today's special' card pinned right over the hero photo." tabindex="0" role="button">
+      <div class="wheel-item"
+        data-title="Sunny Side Coffee"
+        data-year="2026 · Concept design"
+        data-desc="A neighborhood coffee shop concept with playful sun branding and a 'today's special' pinned right over the homepage photo."
+        data-problem="Small cafés live and die by regulars checking what's new. A static site with an old menu photo actively costs sales, because customers stop trusting it and stop checking it."
+        data-approach="Playful sun branding and a hand-drawn divider keep the warmth of a neighborhood spot, while a 'today's special' card sits right over the hero photo — the one thing a returning customer actually wants, answered before they scroll."
+        data-shows="How I'd design around the one piece of information a repeat customer checks the site for, instead of burying it in a menu page."
+        tabindex="0" role="button">
         <span class="wi-num">02</span>
         <div class="wi-img proj-ssc" aria-hidden="true"></div>
       </div>
-      <div class="wheel-item" data-title="goldeneye" data-year="2026 · Concept design" data-desc="A vintage and streetwear boutique concept — full-bleed editorial photography, a bold italic wordmark, and a shop-by-category grid right below the fold." tabindex="0" role="button">
+      <div class="wheel-item"
+        data-title="goldeneye"
+        data-year="2026 · Concept design"
+        data-desc="A vintage and streetwear boutique concept — full-bleed photography and a shop-by-category grid right below the fold."
+        data-problem="A boutique's whole pitch is its taste. A generic template undersells inventory that's actually well curated, and shoppers bounce before they see what's in stock."
+        data-approach="Full-bleed editorial photography and a bold wordmark set the tone immediately, then a shop-by-category grid gets shoppers browsing real inventory within one scroll, instead of stalling on a mission statement."
+        data-shows="How I'd balance style with usability — a site that looks as sharp as the inventory, but still gets people shopping fast."
+        tabindex="0" role="button">
         <span class="wi-num">03</span>
         <div class="wi-img proj-ge" aria-hidden="true"></div>
       </div>
@@ -449,8 +483,22 @@
   <div class="lb-close" id="lbClose" tabindex="0" role="button" aria-label="Close preview">Close ✕</div>
   <div class="lb-inner">
     <div class="lb-img" id="lbImg" aria-hidden="true"></div>
+    <div class="lb-tag" id="lbTag">Concept design</div>
     <div class="lb-caption" id="lbCaption"></div>
-    <div class="lb-desc" id="lbDesc"></div>
+    <div class="lb-case">
+      <div class="lb-block">
+        <span class="lb-label">The problem</span>
+        <p id="lbProblem"></p>
+      </div>
+      <div class="lb-block">
+        <span class="lb-label">The approach</span>
+        <p id="lbApproach"></p>
+      </div>
+      <div class="lb-block">
+        <span class="lb-label">What it shows</span>
+        <p id="lbShows"></p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -563,15 +611,19 @@
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
   const lbCaption = document.getElementById('lbCaption');
-  const lbDesc = document.getElementById('lbDesc');
+  const lbProblem = document.getElementById('lbProblem');
+  const lbApproach = document.getElementById('lbApproach');
+  const lbShows = document.getElementById('lbShows');
   const lbCloseBtn = document.getElementById('lbClose');
   let lastFocused = null;
-  function openLightbox(imgClass, imgHTML, captionText, descText, triggerEl){
+  function openLightbox(imgClass, imgHTML, captionText, caseStudy, triggerEl){
     lastFocused = triggerEl || document.activeElement;
     lbImg.className = 'lb-img ' + imgClass;
     lbImg.innerHTML = imgHTML || '';
     lbCaption.textContent = captionText;
-    lbDesc.textContent = descText || '';
+    lbProblem.textContent = (caseStudy && caseStudy.problem) || '';
+    lbApproach.textContent = (caseStudy && caseStudy.approach) || '';
+    lbShows.textContent = (caseStudy && caseStudy.shows) || '';
     lightbox.classList.add('open');
     lbCloseBtn.focus();
   }
@@ -646,7 +698,8 @@
     if(i === activeWheel){
       const wiImg = item.querySelector('.wi-img');
       const extraClasses = Array.from(wiImg.classList).filter(c => c !== 'wi-img').join(' ');
-      openLightbox(extraClasses, wiImg.innerHTML, `${item.dataset.title} — ${item.dataset.year}`, item.dataset.desc, item);
+      const caseStudy = { problem: item.dataset.problem, approach: item.dataset.approach, shows: item.dataset.shows };
+      openLightbox(extraClasses, wiImg.innerHTML, item.dataset.title, caseStudy, item);
     } else {
       activeWheel = i;
       layoutWheel();
