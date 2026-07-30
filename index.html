@@ -267,6 +267,18 @@
   .card .num, .card h3, .card p{ position:relative; z-index:1; transition:color .3s; }
   .card:hover .num, .card:hover .icon, .card:hover h3, .card:hover p{ color:var(--bg); }
 
+  /* ---------- how it works ---------- */
+  #process{
+    background-image: radial-gradient(rgba(244,241,234,0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .process-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:5vh; }
+  @media (max-width:800px){ .process-grid{ grid-template-columns:1fr; } }
+  .process-step{ background:var(--bg); padding:4vh 2vw; }
+  .process-step .num{ font-size:11px; opacity:.5; color:var(--accent2); }
+  .process-step h3{ font-size:1.15rem; font-weight:600; margin-top:2vh; }
+  .process-step p{ font-size:.85rem; margin-top:1.2vh; opacity:.7; max-width:26ch; }
+
   /* ---------- about ---------- */
   #about{
     background-image: radial-gradient(rgba(244,241,234,0.06) 1px, transparent 1px);
@@ -450,8 +462,36 @@
   </div>
 </section>
 
-<section id="about">
+<section id="process">
   <div class="section-mark" aria-hidden="true">04</div>
+  <div class="eyebrow">How it works</div>
+  <h2 style="font-size:clamp(1.8rem,4vw,3rem); font-weight:700; max-width:20ch;">Four steps, start to finish</h2>
+  <div class="process-grid">
+    <div class="process-step">
+      <span class="num">01</span>
+      <h3>Message me about your business</h3>
+      <p>Tell me what you do and what's not working about your site now — or that you don't have one yet.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">02</span>
+      <h3>Free homepage preview</h3>
+      <p>I design a real homepage for your business, no charge and no commitment, so you can see it before you decide anything.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">03</span>
+      <h3>You approve, I build</h3>
+      <p>Like what you see, and I build out the full site. Nothing moves forward until you say go.</p>
+    </div>
+    <div class="process-step">
+      <span class="num">04</span>
+      <h3>Launch, everything handed off</h3>
+      <p>Your site goes live, and you get what you need to keep it — you're never locked out of your own business.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-mark" aria-hidden="true">05</div>
   <div class="eyebrow">About</div>
   <div class="about-grid">
     <div class="portrait" role="img" aria-label="Portrait of Julio Ortega"></div>
@@ -467,7 +507,7 @@
 </section>
 
 <footer id="contact">
-  <div class="section-mark" aria-hidden="true">05</div>
+  <div class="section-mark" aria-hidden="true">06</div>
   <div class="eyebrow">Get in touch</div>
   <a href="mailto:Julio.ortega1013@gmail.com" class="distort-title" id="distortTitle" data-magnetic>Julio.ortega1013@gmail.com</a>
   <p class="sub">Open to freelance web design and front-end work. Replies within a couple of days.</p>
