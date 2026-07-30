@@ -299,6 +299,7 @@
 
   /* ---------- contact / footer ---------- */
   footer{ min-height:60vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; }
+  footer .cta-line{ max-width:34ch; font-size:clamp(1rem, 2vw, 1.3rem); font-weight:500; color:var(--fg); margin-bottom:3vh; }
   .distort-title{ font-size:clamp(2rem, 9vw, 7rem); font-weight:800; letter-spacing:-0.02em; transition:transform .15s ease-out, letter-spacing .3s; cursor:none; word-break:break-word; }
   .distort-title:hover{ letter-spacing:0.01em; }
   footer .sub{ margin-top:3vh; color:var(--muted); font-size:.9rem; }
@@ -509,8 +510,9 @@
 <footer id="contact">
   <div class="section-mark" aria-hidden="true">06</div>
   <div class="eyebrow">Get in touch</div>
-  <a href="mailto:Julio.ortega1013@gmail.com" class="distort-title" id="distortTitle" data-magnetic>Julio.ortega1013@gmail.com</a>
-  <p class="sub">Open to freelance web design and front-end work. Replies within a couple of days.</p>
+  <p class="cta-line">Tell me about your business — I'll send a free homepage preview, no commitment.</p>
+  <a href="mailto:Julio.ortega1013@gmail.com?subject=Website%20inquiry&body=Hi%20Julio%20%E2%80%94%20I%20run%20%5Bbusiness%20name%5D%20in%20%5Bcity%5D.%20I%27m%20looking%20for..." class="distort-title" id="distortTitle" data-magnetic>Julio.ortega1013@gmail.com</a>
+  <p class="sub">Open to freelance web design work for local businesses.</p>
   <div class="socials">
     <a href="https://github.com/OrtegaJulio-FS" target="_blank" rel="noopener">GitHub</a>
     <a href="https://www.linkedin.com/in/julio-ortega-2b9ba91b3" target="_blank" rel="noopener">LinkedIn</a>
