@@ -173,6 +173,8 @@
   }
   .wheel-item .wi-num{ position:absolute; top:-1.6em; left:2px; font-size:11px; letter-spacing:.1em; color:var(--muted); transition:color .3s; }
   .wheel-item.active .wi-num{ color:var(--accent); }
+  /* label for a future real, launched project — see the commented template in #wheelTrack */
+  .wheel-item .wi-live-tag{ position:absolute; top:-1.6em; left:2.8em; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); }
   .wheel-item .wi-img{
     position:relative; width:100%; height:100%;
     background-size:cover; background-position:top center;
@@ -234,6 +236,8 @@
     color:var(--accent2); margin-bottom:.7vh;
   }
   #lightbox .lb-block p{ font-size:.9rem; line-height:1.55; color:var(--muted); }
+  /* shown only when a wheel item carries a real data-live-url (see the commented live-project template) */
+  #lightbox .lb-live-link{ display:inline-block; margin-top:3vh; font-size:.8rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); border-bottom:1px solid var(--accent); padding-bottom:2px; }
   #lightbox .lb-close{ position:absolute; top:3vh; right:5vw; font-size:11px; letter-spacing:.15em; text-transform:uppercase; cursor:none; }
 
   /* ---------- scroll-lit statement ---------- */
@@ -296,6 +300,12 @@
   #about .facts{ margin-top:4vh; display:flex; gap:6vw; flex-wrap:wrap; }
   #about .facts div{ font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
   #about .facts strong{ display:block; color:var(--fg); font-size:1rem; letter-spacing:0; text-transform:none; margin-top:.6vh; }
+
+  /* ---------- testimonial (inactive — no real testimonial exists yet) ---------- */
+  #testimonial{ text-align:center; }
+  .testimonial-quote{ max-width:56ch; margin:0 auto; }
+  .testimonial-quote p{ font-size:clamp(1.3rem,2.6vw,2rem); font-weight:500; line-height:1.45; }
+  .testimonial-quote cite{ display:block; margin-top:3vh; font-size:.85rem; font-style:normal; color:var(--muted); }
 
   /* ---------- contact / footer ---------- */
   footer{ min-height:60vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; position:relative; }
@@ -402,6 +412,24 @@
         <span class="wi-num">03</span>
         <div class="wi-img proj-ge" aria-hidden="true"></div>
       </div>
+      <!-- ACTIVATE WHEN REAL — live project template. Duplicate this block with real
+           data once a concept becomes an actual launched client site, fill in the
+           brackets, add a matching .proj-XX background-image rule in the CSS above,
+           and uncomment. No JS changes needed — wheelCount reads the DOM directly.
+      <div class="wheel-item"
+        data-title="[Business Name]"
+        data-year="2026 · Live site"
+        data-desc="[Short one-line caption for the wheel caption row.]"
+        data-problem="[The problem this business had.]"
+        data-approach="[The approach taken.]"
+        data-shows="[What it shows.]"
+        data-live-url="[https://example.com]"
+        tabindex="0" role="button">
+        <span class="wi-num">04</span>
+        <span class="wi-live-tag">Live site</span>
+        <div class="wi-img proj-XX" aria-hidden="true"></div>
+      </div>
+      -->
     </div>
     <button class="wheel-nav next" id="wheelNext" aria-label="Next project">→</button>
   </div>
@@ -507,6 +535,19 @@
   </div>
 </section>
 
+<!-- ACTIVATE WHEN REAL — testimonial section. Uncomment once a first real client
+     testimonial exists, fill in the brackets, and renumber every .section-mark
+     from this point on (it would become 06, pushing Contact to 07).
+<section id="testimonial">
+  <div class="section-mark" aria-hidden="true">06</div>
+  <div class="eyebrow">What clients say</div>
+  <blockquote class="testimonial-quote">
+    <p>"[Real client quote goes here.]"</p>
+    <cite>[Client Name], [Business Name]</cite>
+  </blockquote>
+</section>
+-->
+
 <footer id="contact">
   <div class="section-mark" aria-hidden="true">06</div>
   <div class="eyebrow">Get in touch</div>
@@ -541,6 +582,7 @@
         <p id="lbShows"></p>
       </div>
     </div>
+    <a class="lb-live-link" id="lbLiveLink" href="#" target="_blank" rel="noopener" hidden>Visit the live site ↗</a>
   </div>
 </div>
 
@@ -652,20 +694,25 @@
   // ---------- lightbox ----------
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
+  const lbTag = document.getElementById('lbTag');
   const lbCaption = document.getElementById('lbCaption');
   const lbProblem = document.getElementById('lbProblem');
   const lbApproach = document.getElementById('lbApproach');
   const lbShows = document.getElementById('lbShows');
+  const lbLiveLink = document.getElementById('lbLiveLink');
   const lbCloseBtn = document.getElementById('lbClose');
   let lastFocused = null;
-  function openLightbox(imgClass, imgHTML, captionText, caseStudy, triggerEl){
+  function openLightbox(imgClass, imgHTML, captionText, tagText, caseStudy, liveUrl, triggerEl){
     lastFocused = triggerEl || document.activeElement;
     lbImg.className = 'lb-img ' + imgClass;
     lbImg.innerHTML = imgHTML || '';
+    lbTag.textContent = tagText;
     lbCaption.textContent = captionText;
     lbProblem.textContent = (caseStudy && caseStudy.problem) || '';
     lbApproach.textContent = (caseStudy && caseStudy.approach) || '';
     lbShows.textContent = (caseStudy && caseStudy.shows) || '';
+    if(liveUrl){ lbLiveLink.href = liveUrl; lbLiveLink.hidden = false; }
+    else{ lbLiveLink.removeAttribute('href'); lbLiveLink.hidden = true; }
     lightbox.classList.add('open');
     lbCloseBtn.focus();
   }
@@ -741,7 +788,8 @@
       const wiImg = item.querySelector('.wi-img');
       const extraClasses = Array.from(wiImg.classList).filter(c => c !== 'wi-img').join(' ');
       const caseStudy = { problem: item.dataset.problem, approach: item.dataset.approach, shows: item.dataset.shows };
-      openLightbox(extraClasses, wiImg.innerHTML, item.dataset.title, caseStudy, item);
+      const tagText = item.dataset.year.includes('Live site') ? 'Live site' : 'Concept design';
+      openLightbox(extraClasses, wiImg.innerHTML, item.dataset.title, tagText, caseStudy, item.dataset.liveUrl, item);
     } else {
       activeWheel = i;
       layoutWheel();
